@@ -48,8 +48,8 @@ end
 local function start_server(model, args, on_started)
   local sys_opts = resolve_system_opts(model, args or {})
 
-  local stop = system(sys_opts.cmd, sys_opts.args, {}, nil, function(out)
-    if out and out:find('server is listening on') then
+  local stop = system(sys_opts.cmd, sys_opts.args, {}, function(out)
+    if out then
       util.show('llama.cpp server started')
       on_started()
     end
